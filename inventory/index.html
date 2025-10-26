@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacarandá Inventory</title>
+    <link rel="stylesheet" href="./css/simple.min.css">
+</head>
+<body>
+    <main>
+        <h1>Jacarandá Inventory</h1>
+        <section>
+            <h2>Add new product</h2>
+            <form id="addProduct">
+                <label for="name">Product name:</label>
+                <input type="text" name="name" id="name">
+
+                <label for="quantity">Quantity: </label>
+                <input type="number" name="quantity" id="quantity">
+
+                <label for="price">Price: </label>
+                <input type="number" name="price" id="price">
+
+                <button type="submit">Add product</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Inventory</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
