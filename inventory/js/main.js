@@ -79,7 +79,19 @@ addProductForm.addEventListener('submit', (event) => {
 renderTable(inventory);
 
 
-const updateRow = ({name,quantity, price}) =>{
+function updateRow({name,quantity,price}){
+    
+    const product = inventory.items.find(p=>p.name.toLocaleLowerCase()===name.toLocaleLowerCase())
+    let total = parseInt(product.quantity);
+    product.price = price;
+    total += parseInt(quantity);
+    product.quantity = total;
+    renderTable(inventory);
+}
 
-
+function productsBiggerThan50(price,tr){
+    
+    if(price>50){
+        tr.className='cambia';
+    }
 }
