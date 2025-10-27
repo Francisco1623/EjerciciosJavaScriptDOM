@@ -5,7 +5,7 @@ const listAcronymsRender = [];
  * @returns 
  */
 function generateAcronym(phrase){
-  return  phrase.split(' ').reduce((acum,iter)=>acum+=iter[0].toLocaleUpperCase(),'');
+  return  phrase.trim().split(' ').reduce((acum,iter)=>acum+=iter[0].toUpperCase(),'');
 }
 /**
  * 
@@ -17,11 +17,12 @@ function highlightPhrase(phrase){
 }
 
 function addAcronym(phrase){
-  return phrase?generateAcronym(phrase):'';
+  return listAcronymsRender.push(generateAcronym(phrase));
 }
 
 
 
 
-export{generateAcronym,highlightPhrase, addAcronym, listAcronymsRender};
+
+export{addAcronym, listAcronymsRender};
 
