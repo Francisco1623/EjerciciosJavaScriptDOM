@@ -1,4 +1,4 @@
-import { inventory, addItem, removeItem, updateTotalItems } from "./inventory.js";
+import { inventory, addItem, removeItem, updateTotalItems,updateLocalStorage } from "./inventory.js";
 
 // HTML elements
 
@@ -28,6 +28,7 @@ function addRow({name, quantity, price}){
 
     deleteButton.addEventListener('click',()=>{
         removeItem(name,inventory);
+        updateLocalStorage();
         renderTable(inventory);
     })
 
@@ -73,6 +74,7 @@ addProductForm.addEventListener('submit', (event) => {
         } else {
             updateRow({name,quantity, price})
         }
+        updateLocalStorage();
     }
 })
 
@@ -87,6 +89,7 @@ function updateRow({name,quantity,price}){
     total += parseInt(quantity);
     product.quantity = total;
     renderTable(inventory);
+    
 }
 
 function productsBiggerThan50(price,tr){

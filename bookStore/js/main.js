@@ -1,3 +1,4 @@
+
 let bookStore = {
   books: [
     { title: "1984", author: "George Orwell", price: 15, category: "Fiction" },
@@ -5,41 +6,48 @@ let bookStore = {
   ]
 };
 
+let books = JSON.parse(localStorage.getItem('books')) || bookStore.books;
+
+
 const formBook = document.getElementById('formBook');
 const tbodyBook = document.getElementById('tbodyBook');
 const categoryFilter = document.getElementById('categoryFilter');
 
 function renderTable(){
     tbodyBook.innerHTML = '';
-    bookStore.books.forEach(b=>{
+   
+        const categoryFilter = document.getElementById('categoryFilter').value;
+        const filterCategory = books.filter(b=>b.category == categoryFilter);
         
+        filterCategory.forEach(b=>{
+            const tr = document.createElement('tr');
+            tbodyBook.appendChild(tr);
+
+            const tdTitle = document.createElement('td');
+            tdTitle.textContent=b.title;
+
+            const tdAuthor = document.createElement('td');
+            tdAuthor.textContent=b.author;
+
+            const tdPrice = document.createElement('td');
+            tdPrice.textContent=b.price;
+
+            const tdCategory = document.createElement('td');
+            tdCategory.textContent=b.category;
+
+            tr.appendChild(tdTitle);
+            tr.appendChild(tdAuthor);
+            tr.appendChild(tdPrice);
+            tr.appendChild(tdCategory);
+        })
+        
+
+        
+
+
+
+
     
-        const tr = document.createElement('tr');
-        tbodyBook.appendChild(tr);
-
-        const tdTitle = document.createElement('td');
-        tdTitle.textContent=b.title;
-
-        const tdAuthor = document.createElement('td');
-        tdAuthor.textContent=b.author;
-
-        const tdPrice = document.createElement('td');
-        tdPrice.textContent=b.price;
-
-        const tdCategory = document.createElement('td');
-        tdCategory.textContent=b.category;
-
-        tr.appendChild(tdTitle);
-        tr.appendChild(tdAuthor);
-        tr.appendChild(tdPrice);
-        tr.appendChild(tdCategory);
-
-        
-
-
-
-
-    })
 }
 
 formBook.addEventListener('submit',(event)=>{
@@ -50,19 +58,21 @@ formBook.addEventListener('submit',(event)=>{
     const category = document.getElementById('category').value;
 
     if(title && author && price>0 && category){
-        bookStore.books.push({title,author,price,category});
+        books.push({title,author,price,category});
+        updateLocalStorage();
+
         formBook.reset();
     }
     renderTable();
 
+
 })
 
-
-
-
-function filterCategory(book){
-    const categoryFilter = document.getElementById('categoryFilter').value;
-    return book.filter(b=>b.category===categoryFilter);
+function updateLocalStorage(){
+    localStorage.setItem('books',JSON.stringify(books));
 }
+
+
+categoryFilter.addEventListener('change',renderTable);
 
 renderTable();

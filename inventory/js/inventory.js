@@ -1,4 +1,4 @@
-const inventory = {
+const inventory1 = {
   items: [
     { name: "Laptop", quantity: 5, price: 1200 },
     { name: "Mouse", quantity: 25, price: 20 },
@@ -6,6 +6,7 @@ const inventory = {
   ],
   totalItems: 0
 };
+let inventory = JSON.parse(localStorage.getItem('items')) || inventory1
 
 
 function updateTotalItems (inventory){
@@ -39,5 +40,9 @@ function removeItem2(itemName, inventory){
     updateTotalItems(inventory)
 }
 
-export {inventory, updateTotalItems, addItem, removeItem}
+function updateLocalStorage(){
+    localStorage.setItem('items',JSON.stringify(inventory));
+}
+
+export {inventory, updateTotalItems, addItem, removeItem,updateLocalStorage}
 
